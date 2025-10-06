@@ -1,3 +1,7 @@
+<?php
+  require_once __DIR__ . '/../../src/utils/utils.class.php';
+?>
+
 <!-- Navigation Bar -->
    <nav class="navbar navbar-fixed-top navbar-default">
      <div class="container">
@@ -15,7 +19,7 @@
          <div class="collapse navbar-collapse navbar-right" id="menu">
             <ul class="nav navbar-nav">
               <?php 
-                if (esOpcionMenuActiva('/index.php')==true || esOpcionMenuActiva('/')==true)
+                if (Utils::esOpcionMenuActiva('/index.php')==true || Utils::esOpcionMenuActiva('/')==true)
                 {
                   echo '<li class="active lien">';
                 }
@@ -27,7 +31,7 @@
               <a href="index.php"><i class="fa fa-home sr-icons"></i> Home</a></li>
               
               <?php 
-                if (esOpcionMenuActiva('/about.php')==true)
+                if (Utils::esOpcionMenuActiva('/about.php')==true)
                 {
                   echo '<li class="active lien">';
                 }
@@ -39,7 +43,7 @@
               <a href="about.php"><i class="fa fa-bookmark sr-icons"></i> About</a></li>
               
               <?php 
-                if (esOpcionMenuActiva('/blog.php')==true)
+                if (Utils::esOpcionMenuActiva('/blog.php')==true)
                 {
                   echo '<li class="active lien">';
                 }
@@ -51,7 +55,7 @@
               <a href="blog.php"><i class="fa fa-file-text sr-icons"></i> Blog</a></li>
               
               <?php 
-                if (esOpcionMenuActiva('/contact.php')==true)
+                if (Utils::esOpcionMenuActiva('/contact.php')==true)
                 {
                   echo '<li class="active lien">';
                 }
