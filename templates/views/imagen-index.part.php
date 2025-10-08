@@ -47,9 +47,48 @@
         </div>
         <nav class="text-center">
                 <ul class="pagination">
-                  <li class="active"><a href="#">1</a></li>
-                  <li><a href="#">2</a></li>
-                  <li><a href="#">3</a></li>
+                  <?php 
+                    if ($idCategoria === 1)
+                    {
+                      ?>
+                      <li class="active"><a href="#">1</a></li>
+                      <?php
+                    }
+                    else
+                    {
+                      ?>
+                      <li><a href="#">1</a></li>
+                      <?php
+                    }  
+                  ?>
+                  <?php 
+                    if ($idCategoria === 2)
+                    {
+                      ?>
+                      <li class="active"><a href="#">2</a></li>
+                      <?php
+                    }
+                    else
+                    {
+                      ?>
+                      <li><a href="#">2</a></li>
+                      <?php
+                    }  
+                  ?>
+                  <?php 
+                    if ($idCategoria === 3)
+                    {
+                      ?>
+                      <li class="active"><a href="#">3</a></li>
+                      <?php
+                    }
+                    else
+                    {
+                      ?>
+                      <li><a href="#">3</a></li>
+                      <?php
+                    }  
+                  ?>
                   <li><a href="#" aria-label="suivant">
                     <span aria-hidden="true">&raquo;</span>
                   </a></li>
