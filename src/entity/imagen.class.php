@@ -85,7 +85,7 @@
         /**
          * @return int
          */
-        public function getCategoria(): ?string
+        public function getCategoria(): ?int
         {
             return $this->categoria;
         }
@@ -96,6 +96,54 @@
         public function setCategoria($categoria) : Imagen
         {
             $this->categoria = $categoria;
+            return $this;
+        }
+        /**
+         * @return int
+         */
+        public function getNumVisualizaciones(): ?int
+        {
+            return $this->numVisualizaciones;
+        }
+        /**
+         * @param $numVisualizaciones
+         * @return Imagen
+         */
+        public function setNumVisualizaciones($numVisualizaciones) : Imagen
+        {
+            $this->numVisualizaciones = $numVisualizaciones;
+            return $this;
+        }
+        /**
+         * @return int
+         */
+        public function getNumLikes(): ?int
+        {
+            return $this->numLikes;
+        }
+        /**
+         * @param $numLikes
+         * @return Imagen
+         */
+        public function setNumLikes($numLikes) : Imagen
+        {
+            $this->numLikes = $numLikes;
+            return $this;
+        }
+        /**
+         * @return int
+         */
+        public function getNumDownloads(): ?int
+        {
+            return $this->numDownloads;
+        }
+        /**
+         * @param $numDownloads
+         * @return Imagen
+         */
+        public function setNumDownloads($numDownloads) : Imagen
+        {
+            $this->numDownloads = $numDownloads;
             return $this;
         }
         public function __toString() : string
