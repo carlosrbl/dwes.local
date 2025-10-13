@@ -43,6 +43,18 @@
               <a href="about.php"><i class="fa fa-bookmark sr-icons"></i> About</a></li>
               
               <?php 
+                if (Utils::esOpcionMenuActiva('/galeria.php')==true)
+                {
+                  echo '<li class="active lien">';
+                }
+                else
+                {
+                  echo '<li class="lien">';
+                } 
+              ?>
+              <a href="galeria.php"><i class="fa fa-bookmark sr-icons"></i> Galeria</a></li>
+
+              <?php 
                 if (Utils::esOpcionMenuActiva('/blog.php')==true)
                 {
                   echo '<li class="active lien">';
