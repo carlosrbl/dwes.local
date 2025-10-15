@@ -11,7 +11,7 @@
          <div class="col-xs-12 intro">
             <div class="carousel-inner">
                <div class="item active">
-                <img class="img-responsive" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTmq1CO6N6EAZWdccXyMhFqgD2V8HjlupYKhg&s" alt="header picture">
+                <img class="img-responsive" src="../public/images/index/woman.jpg" alt="header picture">
                 <!-- <img class="img-responsive" src="../public/images/index/woman.jpg" alt="header picture"> -->
                </div>
                <!-- <div class="carousel-caption">
@@ -80,34 +80,9 @@
       </div>
     <!-- End of Newsletter form -->  
 
-    <!-- Box within partners name and logo -->
-      <div class="last-box row">
-        <div class="col-xs-12 col-sm-4 col-sm-push-4 last-block">
-        <div class="partner-box text-center">
-          <p>
-          <i class="fa fa-map-marker fa-2x sr-icons"></i> 
-          <span class="text-muted">35 North Drive, Adroukpape, PY 88105, Agoe Telessou</span>
-          </p>
-          <h4>Our Main Partners</h4>
-          <hr>
-          <div class="text-muted text-left">
-            <ul class="list-inline">
-              <li><img src="../public/images/index/log2.jpg" alt="logo"></li>
-              <li>First Partner Name</li>
-            </ul>
-            <ul class="list-inline">
-              <li><img src="../public/images/index/log1.jpg" alt="logo"></li>
-              <li>Second Partner Name</li>
-            </ul>
-            <ul class="list-inline">
-              <li><img src="../public/images/index/log3.jpg" alt="logo"></li>
-              <li>Third Partner Name</li>
-            </ul>
-          </div>
-        </div>
-        </div>
-      </div>
-    <!-- End of Box within partners name and logo -->
+    <?php
+      require_once "indexlogos.view.part.php";
+    ?>
 
    </div><!-- End of index box -->
 
