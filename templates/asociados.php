@@ -1,20 +1,36 @@
 <?php
+session_start();
 require_once "../src/utils/file.class.php";
 require_once "../src/entity/asociado.class.php";
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     try {
-        $nombre = trim(htmlspecialchars($_POST['nombre']) ?? "");
-        $descripcion = trim(htmlspecialchars($_POST['descripcion']) ?? "");
+        $nombre = trim(htmlspecialchars($_POST['nombre'] ?? ""));
+        $descripcion = trim(htmlspecialchars($_POST['descripcion'] ?? ""));
+        $errores = [];
 
-        $tiposAceptados = ['image/jpeg', 'image/gif', 'image/png'];
-        $imagen = new File('imagen', $tiposAceptados);
+        if ($nombre == "") {
+            $errores[] = "El nombre no debe estar vacío";
+        }
 
-        $imagen->saveUploadFile(Asociado::RUTA_LOGOS_ASOCIADOS);
+        $captcha = $_POST['captcha'] ?? "";
+        if ($captcha == "") {
+            $errores[] = "Introduzca el código de seguridad";
+        } else if ($_SESSION['captchaGenerado'] != $captcha) {
+            $errores[] = "¡Ha introducido un código de seguridad incorrecto! Inténtelo de nuevo";
+        }
 
-        $mensaje = 'Datos enviados';
+        if (empty($errores)) {
+            $tiposAceptados = ['image/jpeg', 'image/gif', 'image/png'];
+            $imagen = new File('imagen', $tiposAceptados);
+            $imagen->saveUploadFile(Asociado::RUTA_LOGOS_ASOCIADOS);
+            $mensaje = 'Datos enviados';
+        } else {
+            $mensaje = "";
+        }
     } catch (FileException $fileException) {
         $errores[] = $fileException->getMessage();
+        $mensaje = "";
     }
 } else {
     $errores = [];
@@ -22,4 +38,5 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $descripcion = "";
     $mensaje = "";
 }
+
 require_once __DIR__ . "/views/asociados.view.php";
