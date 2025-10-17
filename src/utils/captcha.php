@@ -3,8 +3,8 @@
     session_start();
     $captcha = "";
     $totalCharacteres = rand(5, 8); 
-    $possiblesLetras = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
-    $captchaFont = "CartoonBlocks.ttf"; 
+    $possiblesLetras = "123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+    $captchaFont = "Bangers-Regular.ttf"; 
     $captchaFontSize = rand(30, 40); 
     $caracter = 0;
 
