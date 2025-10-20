@@ -2,6 +2,7 @@
 session_start();
 require_once "../src/utils/file.class.php";
 require_once "../src/entity/asociado.class.php";
+require_once "../src/database/connection.class.php";
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     try {
@@ -24,7 +25,21 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $tiposAceptados = ['image/jpeg', 'image/gif', 'image/png'];
             $imagen = new File('imagen', $tiposAceptados);
             $imagen->saveUploadFile(Asociado::RUTA_LOGOS_ASOCIADOS);
-            $mensaje = 'Datos enviados';
+
+            $conexion = Connection::make();
+            $sql = "INSERT INTO asociados (nombre, logo, descripcion) VALUES (:nombre,:logo,:descripcion)";
+            $pdoStatement = $conexion->prepare($sql);
+            $parametros = [
+                ':nombre' => $nombre,
+                ':logo' => $imagen->getFileName(),
+                ':descripcion' => $descripcion
+            ];
+            if ($pdoStatement->execute($parametros) === false)
+                $errores[] = "No se ha podido guardar la imagen en la base de datos";
+            else {
+                $descripcion = "";
+                $mensaje = "Se ha guardado la imagen correctamente";
+            }
         } else {
             $mensaje = "";
         }
