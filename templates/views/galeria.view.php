@@ -1,6 +1,6 @@
 <?php
-    require_once "inicio.part.php";
-    require_once "navegacion.part.php";
+require_once "inicio.part.php";
+require_once "navegacion.part.php";
 ?>
 <div class="hero hero-inner">
     <div class="container">
@@ -59,10 +59,37 @@
             </form>
             <hr class="divider">
             <div class="imagenes_galeria">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th scope="col">#</th>
+                            <th scope="col">Imagen</th>
+                            <th scope="col">Visualizaciones</th>
+                            <th scope="col">Likes</th>
+                            <th scope="col">Descargas</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <?php foreach ($imagenes as $imagen) : ?>
+                            <tr>
+                                <th scope="row"><?= $imagen->getNombre() ?></th>
+                                <td>
+                                    <img src="<?= $imagen->getUrlSubidas() ?>"
+                                        alt="<?= $imagen->getDescripcion() ?>"
+                                        title="<?= $imagen->getDescripcion() ?>"
+                                        width="100px">
+                                </td>
+                                <td><?= $imagen->getNumVisualizaciones() ?></td>
+                                <td><?= $imagen->getNumLikes() ?></td>
+                                <td><?= $imagen->getNumDownloads() ?></td>
+                            </tr>
+                        <?php endforeach; ?>
+                    </tbody>
+                </table>
             </div>
         </div>
     </div>
 </div>
 <?php
-    require_once "fin.part.php";
+require_once "fin.part.php";
 ?>

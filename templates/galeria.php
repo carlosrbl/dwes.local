@@ -2,9 +2,16 @@
 require_once "../src/utils/file.class.php";
 require_once "../src/entity/imagen.class.php";
 require_once "../src/database/connection.class.php";
+require_once "../src/database/queryBuilder.class.php";
 
-if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    try {
+$errores = [];
+$imagenes = [];
+$descripcion = '';
+$mensaje = '';
+
+try {
+    $conexion = Connection::make();
+    if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $titulo = trim(htmlspecialchars($_POST['titulo']) ?? "");
         $descripcion = trim(htmlspecialchars($_POST['descripcion']) ?? "");
 
@@ -27,13 +34,19 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $descripcion = "";
             $mensaje = "Se ha guardado la imagen correctamente";
         }
-    } catch (FileException $fileException) {
-        $errores[] = $fileException->getMessage();
     }
-} else {
-    $errores = [];
-    $titulo = "";
-    $descripcion = "";
-    $mensaje = "";
+    else
+    {
+        $titulo = "";
+        $descripcion = "";
+    } 
+    $queryBuilder = new QueryBuilder($conexion);
+    $imagenes = $queryBuilder->findAll('imagenes','Imagen');
+}   
+catch (FileException $fileException) {
+    $errores[] = $fileException->getMessage();
+}
+catch ( QueryException $queryException ) {        
+    $errores[] = $fileException->getMessage();
 }
 require_once __DIR__ . "/views/galeria.view.php";
