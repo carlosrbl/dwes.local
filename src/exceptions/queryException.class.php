@@ -1,4 +1,3 @@
 <?php
-Class QueryException extends Exception
-{
-}
+    class QueryException extends Exception {
+    }

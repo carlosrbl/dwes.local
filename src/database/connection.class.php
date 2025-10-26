@@ -1,23 +1,25 @@
 <?php
-    class Connection
+require_once __DIR__ . '/../../core/app.php';
+class Connection
+{
+    /**
+     * @return PDO
+     * @throws AppException
+     */
+
+    public static function make()
     {
-        public static function make()
-        {
-            try {
-                $opciones = [
-                    PDO::MYSQL_ATTR_INIT_COMMAND => "SET NAMES utf8", // Para utilizar utf8
-                    PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION, // Para poder capturar la excepción
-                    PDO::ATTR_PERSISTENT => true // Guarda la conexión y no hay que volver a abrirla en la siguiente petición
-                ];
-                $connection = new PDO(
-                    'mysql:host=dwes.local;dbname=cursophp;charset=utf8',
-                    'usercurso',
-                    'php',
-                    $opciones
-                );
-            } catch (PDOException $PDOException) {
-                die($PDOException->getMessage()); // Se muestra la excepció como si fuera un echo y detiene la ejecución del script
-            }
-            return $connection;
+        try {
+            $config = App::get('config')['database'];
+            $connection = new PDO(
+                $config['connection'] . ';dbname=' . $config['name'],
+                $config['username'],
+                $config['password'],
+                $config['options']
+            );
+        } catch (PDOException $PDOException) {
+            throw new AppException('No se ha podido crear la conexión a la base de datos');
         }
+        return $connection;
     }
+}
