@@ -7,6 +7,7 @@ require_once "src/repository/asociadosRepository.class.php";
 
 $errores = [];
 $descripcion = '';
+$nombre = '';
 $mensaje = '';
 
 try {

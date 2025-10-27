@@ -9,6 +9,7 @@ require_once "src/repository/categoriasRepository.class.php";
 $errores = [];
 $imagenes = [];
 $descripcion = '';
+$titulo = '';
 $mensaje = '';
 
 try {
