@@ -32,7 +32,6 @@ class App
      */
     public static function getConnection()
     {
-        $config = require_once __DIR__ . '/../app/config.php';
         if (!array_key_exists('connection', static::$container))
             static::$container['connection'] = Connection::make();
         return static::$container['connection'];
