@@ -1,5 +1,5 @@
 <?php
-    require_once "../src/database/queryBuilder.class.php";
+    require_once "src/database/queryBuilder.class.php";
 class AsociadosRepository extends QueryBuilder
 {
     /**

@@ -1,8 +1,8 @@
 <?php
-require_once "../src/utils/file.class.php";
-require_once "../src/entity/imagen.class.php";
-require_once "../src/database/connection.class.php";
-require_once "../src/repository/imagenesRepository.class.php";
+require_once "src/utils/file.class.php";
+require_once "src/entity/imagen.class.php";
+require_once "src/database/connection.class.php";
+require_once "src/repository/imagenesRepository.class.php";
 
 $errores = [];
 $imagenes = [];
@@ -10,9 +10,6 @@ $descripcion = '';
 $mensaje = '';
 
 try {
-    $config = require_once __DIR__ . '/../app/config.php';
-    App::bind('config', $config); // Guardamos la configuración en el contenedor de servicios
-
     $imagenesRepository = new ImagenesRepository();
     $imagenes = $imagenesRepository->findAll();
 
@@ -40,4 +37,4 @@ try {
 } catch (AppException $appException) {
     $errores[] = $appException->getMessage();
 }
-require_once __DIR__ . "/views/galeria.view.php";
+require_once __DIR__ . "/../views/galeria.view.php";

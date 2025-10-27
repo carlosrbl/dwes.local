@@ -1,6 +1,6 @@
 <?php
-    require_once __DIR__ . '/../src/entity/imagen.class.php';
-    require_once __DIR__ . '/../src/entity/asociado.class.php';
+    require_once __DIR__ . '/../../src/entity/imagen.class.php';
+    require_once __DIR__ . '/../../src/entity/asociado.class.php';
 
     $imagenesHome[] = new Imagen ('1.jpg','descripción imagen 1',1,456,610,130);
     $imagenesHome[] = new Imagen ('2.jpg','descripción imagen 2',1,600,610,130);
@@ -19,4 +19,4 @@
     $imagenesAsociados[] = new Asociado ("Asociado 2","log2.jpg","Second Partner Name");
     $imagenesAsociados[] = new Asociado ("Asociado 3","log3.jpg","Third Partner Name");
 
-    require_once __DIR__ . "/views/index.view.php";
+    require_once __DIR__ . "/../views/index.view.php";

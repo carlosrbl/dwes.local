@@ -1,18 +1,15 @@
 <?php
 session_start();
-require_once "../src/utils/file.class.php";
-require_once "../src/entity/asociado.class.php";
-require_once "../src/database/connection.class.php";
-require_once "../src/repository/asociadosRepository.class.php";
+require_once "src/utils/file.class.php";
+require_once "src/entity/asociado.class.php";
+require_once "src/database/connection.class.php";
+require_once "src/repository/asociadosRepository.class.php";
 
 $errores = [];
 $descripcion = '';
 $mensaje = '';
 
 try {
-    $config = require_once __DIR__ . '/../app/config.php';
-    App::bind('config', $config); // Guardamos la configuración en el contenedor de servicios
-
     $asociadosRepository = new AsociadosRepository();
 
     if ($_SERVER['REQUEST_METHOD'] === 'POST') {
@@ -53,4 +50,4 @@ try {
 } catch (AppException $appException) {
     $errores[] = $appException->getMessage();
 }
-require_once __DIR__ . "/views/asociados.view.php";
+require_once __DIR__ . "/../views/asociados.view.php";

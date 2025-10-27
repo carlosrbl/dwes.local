@@ -1,5 +1,5 @@
 <?php
-require_once "../src/exceptions/fileException.class.php";
+require_once "src/exceptions/fileException.class.php";
 class File
 {
     private $file; // Contenido del fichero que se sube al servidor
