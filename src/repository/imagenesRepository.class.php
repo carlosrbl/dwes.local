@@ -10,6 +10,16 @@ class ImagenesRepository extends QueryBuilder
     {
         parent::__construct($table, $classEntity);
     }
+    public function guarda(Imagen $imagenGaleria)
+    {
+        $fnGuardaImagen = function () use ($imagenGaleria) { // Creamos una función anónima que se llama como callable
+            $categoria = $this->getCategoria($imagenGaleria);
+            $categoriaRepository = new CategoriasRepository();
+            $categoriaRepository->nuevaImagen($categoria);
+            $this->save($imagenGaleria);
+        };
+        $this->executeTransaction($fnGuardaImagen); // Se pasa un callable
+    }
     /**
      * @param Imagen $imagenGaleria
      * @return Categoria

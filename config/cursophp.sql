@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 20-10-2025 a las 09:33:34
+-- Tiempo de generación: 27-10-2025 a las 21:15:15
 -- Versión del servidor: 10.4.32-MariaDB
 -- Versión de PHP: 8.2.12
 
@@ -42,17 +42,18 @@ CREATE TABLE `asociados` (
 
 CREATE TABLE `categorias` (
   `id` int(11) NOT NULL,
-  `nombre` varchar(100) NOT NULL
+  `nombre` varchar(100) NOT NULL,
+  `numImagenes` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
 
 --
 -- Volcado de datos para la tabla `categorias`
 --
 
-INSERT INTO `categorias` (`id`, `nombre`) VALUES
-(1, 'Categoria I'),
-(2, 'Categoria II'),
-(5, 'Categoria III');
+INSERT INTO `categorias` (`id`, `nombre`, `numImagenes`) VALUES
+(1, 'Categoria I', 1),
+(2, 'Categoria II', 1),
+(3, 'Categoria III', 1);
 
 -- --------------------------------------------------------
 
@@ -66,9 +67,18 @@ CREATE TABLE `imagenes` (
   `descripcion` text NOT NULL,
   `categoria` int(11) NOT NULL DEFAULT 1,
   `numVisualizaciones` int(11) NOT NULL DEFAULT 0,
-  `nunLikes` int(11) NOT NULL DEFAULT 0,
+  `numLikes` int(11) NOT NULL DEFAULT 0,
   `numDownloads` int(11) NOT NULL DEFAULT 0
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
+
+--
+-- Volcado de datos para la tabla `imagenes`
+--
+
+INSERT INTO `imagenes` (`id`, `nombre`, `descripcion`, `categoria`, `numVisualizaciones`, `numLikes`, `numDownloads`) VALUES
+(15, 'como-funciona-javascript.jpg', 'Prueba', 1, 8, 4, 2),
+(16, 'como-funciona-javascript.jpg', 'Prueba 2', 2, 5, 1, 3),
+(17, 'como-funciona-javascript.jpg', 'Prueba 3', 3, 12, 10, 11);
 
 --
 -- Índices para tablas volcadas
@@ -90,7 +100,8 @@ ALTER TABLE `categorias`
 -- Indices de la tabla `imagenes`
 --
 ALTER TABLE `imagenes`
-  ADD PRIMARY KEY (`id`);
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `fk_imagenes_categoria` (`categoria`);
 
 --
 -- AUTO_INCREMENT de las tablas volcadas
@@ -100,7 +111,7 @@ ALTER TABLE `imagenes`
 -- AUTO_INCREMENT de la tabla `asociados`
 --
 ALTER TABLE `asociados`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT de la tabla `categorias`
@@ -112,7 +123,17 @@ ALTER TABLE `categorias`
 -- AUTO_INCREMENT de la tabla `imagenes`
 --
 ALTER TABLE `imagenes`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
+
+--
+-- Restricciones para tablas volcadas
+--
+
+--
+-- Filtros para la tabla `imagenes`
+--
+ALTER TABLE `imagenes`
+  ADD CONSTRAINT `fk_imagenes_categoria` FOREIGN KEY (`categoria`) REFERENCES `categorias` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

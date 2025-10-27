@@ -16,6 +16,17 @@ abstract class QueryBuilder
         $this->table = $table;
         $this->classEntity = $classEntity;
     }
+    public function executeTransaction(callable $fnExecuteQuerys)
+    {
+        try {
+            $this->connection->beginTransaction();
+            $fnExecuteQuerys(); // LLamamos a todas las consultas SQL de la transacción
+            $this->connection->commit();
+        } catch (PDOException $pdoException) {
+            $this->connection->rollBack(); // Se deshacen todos los cambios desde beginTransaction()
+            throw new QueryException("No se ha podido realizar la operación.");
+        }
+    }
     /* Función que le pasamos el nombre de la tabla y el nombre
     de la clase a la cual queremos convertir los datos extraidos
     de la tabla.
@@ -78,6 +89,32 @@ abstract class QueryBuilder
             $statement->execute($parametrers);
         } catch (PDOException $exception) {
             throw new QueryException("Error al insertar en la base de datos.");
+        }
+    }
+    public function getUpdates(array $parameters)
+    {
+        $updates = '';
+        foreach ($parameters as $key => $value) {
+            if ($key !== 'id')
+                if ($updates !== '')
+                    $updates .= ", ";
+            $updates .= $key . '=:' . $key;
+        }
+        return $updates;
+    }
+    public function update(IEntity $entity): void
+    {
+        try {
+            $parameters = $entity->toArray();
+            $sql = sprintf(
+                'UPDATE %s SET %s WHERE id=:id',
+                $this->table,
+                $this->getUpdates($parameters)
+            );
+            $statement = $this->connection->prepare($sql);
+            $statement->execute($parameters);
+        } catch (PDOException $pdoException) {
+            throw new QueryException("No se ha podido actualizar el elemento con id " . $parameters['id']);
         }
     }
 }
