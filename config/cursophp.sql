@@ -51,9 +51,9 @@ CREATE TABLE `categorias` (
 --
 
 INSERT INTO `categorias` (`id`, `nombre`, `numImagenes`) VALUES
-(1, 'Categoria I', 1),
-(2, 'Categoria II', 1),
-(3, 'Categoria III', 1);
+(1, 'Categoria I', 0),
+(2, 'Categoria II', 0),
+(3, 'Categoria III', 0);
 
 -- --------------------------------------------------------
 
@@ -70,15 +70,6 @@ CREATE TABLE `imagenes` (
   `numLikes` int(11) NOT NULL DEFAULT 0,
   `numDownloads` int(11) NOT NULL DEFAULT 0
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
-
---
--- Volcado de datos para la tabla `imagenes`
---
-
-INSERT INTO `imagenes` (`id`, `nombre`, `descripcion`, `categoria`, `numVisualizaciones`, `numLikes`, `numDownloads`) VALUES
-(15, 'como-funciona-javascript.jpg', 'Prueba', 1, 8, 4, 2),
-(16, 'como-funciona-javascript.jpg', 'Prueba 2', 2, 5, 1, 3),
-(17, 'como-funciona-javascript.jpg', 'Prueba 3', 3, 12, 10, 11);
 
 --
 -- Índices para tablas volcadas
