@@ -18,7 +18,7 @@ class Connection
                 $config['options']
             );
         } catch (PDOException $PDOException) {
-            throw new AppException('No se ha podido crear la conexión a la base de datos');
+            throw new AppException('No se ha podido crear la conexión a la base de datos' . $PDOException->getMessage());
         }
         return $connection;
     }
