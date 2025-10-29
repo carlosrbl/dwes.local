@@ -1,4 +1,5 @@
 <?php
+session_start();
 require_once "src/utils/file.class.php";
 require_once "src/entity/imagen.class.php";
 require_once "src/entity/categoria.class.php";
@@ -12,41 +13,27 @@ $descripcion = '';
 $titulo = '';
 $mensaje = '';
 
+if (isset($_SESSION['errores_post'])) {
+    $errores = $_SESSION['errores_post'];
+    unset($_SESSION['errores_post']);
+}
+
+if (isset($_SESSION['mensaje_exito'])) {
+    $mensaje = $_SESSION['mensaje_exito'];
+    unset($_SESSION['mensaje_exito']);
+}
+
 try {
     $imagenesRepository = new ImagenesRepository();
+    $categoriasRepository = new CategoriasRepository();
+
     $imagenes = $imagenesRepository->findAll();
+    $categorias = $categoriasRepository->findAll();
 
-    $categoriaRepository = new CategoriasRepository();
-    $categorias = $categoriaRepository->findAll();
-
-    if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-        $titulo = trim(htmlspecialchars($_POST['titulo']) ?? "");
-        $descripcion = trim(htmlspecialchars($_POST['descripcion']) ?? "");
-
-        $categoria = trim(htmlspecialchars($_POST['categoria']));
-        if (empty($categoria))
-            throw new CategoriaException;
-
-        $tiposAceptados = ['image/jpeg', 'image/gif', 'image/png'];
-        $imagen = new File('imagen', $tiposAceptados);
-
-        $imagen->saveUploadFile(Imagen::RUTA_IMAGENES_SUBIDAS);
-
-        $imagenGaleria = new Imagen($imagen->getFileName(), $descripcion,$categoria);
-        $imagenesRepository->guarda($imagenGaleria);
-        $mensaje = "Se ha guardado la imagen correctamente";
-        $imagenes = $imagenesRepository->findAll();
-    } else {
-        $titulo = "";
-        $descripcion = "";
-    }
-} catch (FileException $fileException) {
-    $errores[] = $fileException->getMessage();
 } catch (QueryException $queryException) {
-    $errores[] = $fileException->getMessage();
+    $errores[] = $queryException->getMessage();
 } catch (AppException $appException) {
     $errores[] = $appException->getMessage();
-} catch (CategoriaException) {
- $errores[] = "No se ha seleccionado una categoría válida";
 }
+
 require_once __DIR__ . "/../views/galeria.view.php";

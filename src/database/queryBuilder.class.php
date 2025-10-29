@@ -1,6 +1,7 @@
 <?php
 require_once __DIR__ . '/../exceptions/queryException.class.php';
 require_once __DIR__ . '/../entity/imagen.class.php';
+require_once __DIR__ . '/../entity/categoria.class.php';
 abstract class QueryBuilder
 {
     /**

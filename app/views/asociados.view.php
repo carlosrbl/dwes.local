@@ -21,7 +21,7 @@ require_once "navegacion.part.php";
             <h2>Subir asociados:</h2>
             <hr>
             <!-- Sección que muestra la confirmación del formulario o bien sus errores -->
-            <?php if ($_SERVER['REQUEST_METHOD'] === 'POST') : ?>
+            <?php if (!empty($errores) || !empty($mensaje)) : ?>
                 <div class="alert alert-<?= empty($errores) ? 'info' : 'danger'; ?> alert-dismissible" role="alert">
                     <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                         <span aria-hidden="true">x</span>
@@ -39,7 +39,7 @@ require_once "navegacion.part.php";
             <?php endif; ?>
             <!-- Formulario que permite subir una imagen con su descripción -->
             <!-- Hay que indicar OBLIGATORIAMENTE enctype="multipart/form-data" para enviar ficheros al servidor -->
-            <form clas="form-horizontal" action="/asociados" method="post"
+            <form clas="form-horizontal" action="/asociados/nueva" method="post"
                 enctype="multipart/form-data">
                 <div class="form-group">
                     <div class="col-xs-12">

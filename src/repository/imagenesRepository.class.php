@@ -1,5 +1,6 @@
 <?php
 require_once "src/database/queryBuilder.class.php";
+require_once "categoriasRepository.class.php";
 class ImagenesRepository extends QueryBuilder
 {
     /**
