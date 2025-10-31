@@ -19,6 +19,8 @@ try {
 
     $imagenGaleria = new Imagen($imagen->getFileName(), $descripcion, $categoria);
     $imagenesRepository->guarda($imagenGaleria);
+    
+    App::get('logger')->add("Se ha guardado una imagen: ".$imagenGaleria->getNombre());
     $_SESSION['mensaje_exito'] = "Se ha guardado la imagen correctamente";
 } catch (FileException $fileException) {
     $errores[] = $fileException->getMessage();
